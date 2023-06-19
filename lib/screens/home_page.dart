@@ -11,25 +11,52 @@ class HomeScreen extends StatelessWidget {
       child: SafeArea(
         child: CustomScrollView(
           slivers: <Widget>[
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-              sliver: SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/images/moodinger_logo.png',
-                      width: 146,
-                      height: 20,
+            appbar(),
+            SliverToBoxAdapter(
+              child: Center(
+                child: Container(
+                  height: 64,
+                  width: 64,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                  ),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/icon_plus.png'),
+                      ),
+                      color: AppColors.black,
                     ),
-                    Image.asset(
-                      'assets/images/icon_direct.png',
-                      width: 26,
-                      height: 26,
-                    ),
-                  ],
+                  ),
                 ),
               ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverPadding appbar() {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      sliver: SliverToBoxAdapter(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              'assets/images/moodinger_logo.png',
+              width: 146,
+              height: 20,
+            ),
+            Image.asset(
+              'assets/images/icon_direct.png',
+              width: 26,
+              height: 26,
             ),
           ],
         ),
