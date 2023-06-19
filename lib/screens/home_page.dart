@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: Column(
                       children: [
-                        postsnamecontent(),
+                        postsnamecontent(context),
                         const SizedBox(
                           height: 20,
                         ),
@@ -199,7 +199,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Padding postsnamecontent() {
+  Padding postsnamecontent(contex) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 17),
       child: Row(
@@ -233,8 +233,21 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Image.asset(
-            'assets/images/icon_menu.png',
+          InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  context: contex,
+                  builder: (BuildContext buildContext) {
+                    return Container(
+                      child: Center(
+                        child: Text('data'),
+                      ),
+                    );
+                  });
+            },
+            child: Image.asset(
+              'assets/images/icon_menu.png',
+            ),
           ),
         ],
       ),
