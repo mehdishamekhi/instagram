@@ -1,10 +1,11 @@
 import 'dart:ui';
-
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-
 import 'package:instagram/constants/colors.dart';
 import 'package:instagram/constants/fonts.dart';
+import 'package:instagram/screens/option_bottomsheet.dart';
+import 'package:instagram/screens/send_bottomsheet.dart';
+import 'package:instagram/widgets/story_profile_add_container.dart';
+import 'package:instagram/widgets/story_profile_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -52,10 +53,10 @@ class HomeScreen extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.only(right: 15),
                         child: (index == 0)
-                            ? pluscontainer()
+                            ? const StoryProfileAddContainer()
                             : Column(
                                 children: [
-                                  storycontainer(),
+                                  const StoryProfileContainer(),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -86,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        postmaincontent(),
+                        postmaincontent(context),
                       ],
                     ),
                   );
@@ -99,7 +100,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Container postmaincontent() {
+  Container postmaincontent(context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 17),
       height: 427,
@@ -176,7 +177,35 @@ class HomeScreen extends StatelessWidget {
                             AppFonts.gb(fontsize: 16, color: AppColors.white),
                       ),
                       const Spacer(),
-                      Image.asset('assets/images/icon_share.png'),
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            barrierColor: Colors.transparent,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (BuildContext buildContext) {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: MediaQuery.of(buildContext)
+                                      .viewInsets
+                                      .bottom,
+                                ),
+                                child: DraggableScrollableSheet(
+                                  minChildSize: 0.2,
+                                  initialChildSize: 0.4,
+                                  maxChildSize: 0.7,
+                                  builder: (context, scrollController) {
+                                    return Sendbottomsheet(
+                                        controller: scrollController);
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Image.asset('assets/images/icon_share.png'),
+                      ),
                       const Spacer(),
                       Image.asset('assets/images/icon_save.png'),
                     ],
@@ -204,7 +233,7 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 17),
       child: Row(
         children: [
-          storycontainer(),
+          const StoryProfileContainer(),
           const SizedBox(
             width: 10,
           ),
@@ -236,14 +265,12 @@ class HomeScreen extends StatelessWidget {
           InkWell(
             onTap: () {
               showModalBottomSheet(
-                  context: contex,
-                  builder: (BuildContext buildContext) {
-                    return Container(
-                      child: Center(
-                        child: Text('data'),
-                      ),
-                    );
-                  });
+                backgroundColor: Colors.transparent,
+                context: contex,
+                builder: (BuildContext buildContext) {
+                  return const OptionBottomsheet();
+                },
+              );
             },
             child: Image.asset(
               'assets/images/icon_menu.png',
@@ -251,57 +278,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  DottedBorder storycontainer() {
-    return DottedBorder(
-      borderType: BorderType.RRect,
-      radius: const Radius.circular(15),
-      dashPattern: const [35, 10],
-      padding: const EdgeInsets.all(5),
-      color: AppColors.red,
-      strokeWidth: 2,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: SizedBox(
-          height: 48,
-          width: 48,
-          child: Image.asset('assets/images/profile.jpeg'),
-        ),
-      ),
-    );
-  }
-
-  Widget pluscontainer() {
-    return Column(
-      children: [
-        Container(
-          height: 64,
-          width: 64,
-          decoration: BoxDecoration(
-            image: const DecorationImage(
-              image: AssetImage('assets/images/icon_plus.png'),
-            ),
-            border: Border.all(
-              width: 3,
-              color: Colors.white,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            color: AppColors.black,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          'Your Story',
-          style: AppFonts.gm(
-            fontsize: 10,
-            color: AppColors.white,
-          ),
-        )
-      ],
     );
   }
 }
