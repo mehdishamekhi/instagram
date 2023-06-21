@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/colors.dart';
 import 'package:instagram/constants/fonts.dart';
-import 'package:instagram/widgets/story_profile_container.dart';
 
 class Sendbottomsheet extends StatelessWidget {
   const Sendbottomsheet({required this.controller, super.key});
@@ -130,20 +128,38 @@ class Sendbottomsheet extends StatelessWidget {
                     sliver: SliverGrid(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisExtent: 110,
                         crossAxisCount: 4,
-                        mainAxisSpacing: 48,
+                        mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                       ),
                       delegate: SliverChildBuilderDelegate(
                         childCount: 67,
                         (context, index) {
-                          return const Column(
+                          return Column(
                             children: [
-                              StoryProfileContainer(),
-                              SizedBox(
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      'assets/images/profile.jpeg',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
                                 height: 10,
                               ),
-                              Text('user'),
+                              Text(
+                                'user',
+                                style: AppFonts.gb(
+                                  fontsize: 14,
+                                ),
+                              ),
                             ],
                           );
                         },

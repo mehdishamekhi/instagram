@@ -2,14 +2,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/colors.dart';
 import 'package:instagram/constants/fonts.dart';
+import 'package:instagram/screens/direct_screen.dart';
 import 'package:instagram/screens/option_bottomsheet.dart';
 import 'package:instagram/screens/send_bottomsheet.dart';
 import 'package:instagram/widgets/story_profile_add_container.dart';
 import 'package:instagram/widgets/story_profile_container.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isliked = false;
+  bool issaved = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,12 +31,23 @@ class HomeScreen extends StatelessWidget {
               leadingWidth: 150,
               backgroundColor: AppColors.black,
               actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 17),
-                  child: Image.asset(
-                    'assets/images/icon_direct.png',
-                    width: 26,
-                    height: 26,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext buildContext) =>
+                            const DirectScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 17),
+                    child: Image.asset(
+                      'assets/images/icon_direct.png',
+                      width: 26,
+                      height: 26,
+                    ),
                   ),
                 ),
               ],
@@ -58,15 +77,14 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   const StoryProfileContainer(),
                                   const SizedBox(
-                                    height: 10,
+                                    height: 7,
                                   ),
                                   Text(
-                                    'data',
-                                    style: AppFonts.gm(
-                                      fontsize: 10,
-                                      color: AppColors.white,
+                                    'user',
+                                    style: AppFonts.gb(
+                                      fontsize: 14,
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                       );
@@ -87,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        postmaincontent(context),
+                        postmaincontent(context, isliked, issaved),
                       ],
                     ),
                   );
@@ -100,7 +118,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Container postmaincontent(context) {
+  Container postmaincontent(context, bool islike, bool issave) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 17),
       height: 427,
@@ -147,7 +165,28 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     children: [
-                      Image.asset('assets/images/icon_hart.png'),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            isliked = !isliked;
+                          });
+                        },
+                        child: SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: islike
+                              ? const Icon(
+                                  Icons.favorite,
+                                  color: AppColors.red,
+                                  size: 35,
+                                )
+                              : const Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                        ),
+                      ),
                       const SizedBox(
                         width: 5,
                       ),
@@ -207,7 +246,28 @@ class HomeScreen extends StatelessWidget {
                         child: Image.asset('assets/images/icon_share.png'),
                       ),
                       const Spacer(),
-                      Image.asset('assets/images/icon_save.png'),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            issaved = !issaved;
+                          });
+                        },
+                        child: SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: issaved
+                              ? const Icon(
+                                  Icons.bookmark,
+                                  color: Colors.white,
+                                  size: 35,
+                                )
+                              : const Icon(
+                                  Icons.bookmark_border,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
