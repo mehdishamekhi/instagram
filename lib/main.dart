@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/screens/add_post_screen.dart';
 import 'package:instagram/screens/auth_screen.dart';
 import 'package:instagram/screens/home_page.dart';
 import 'package:instagram/screens/login_page.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: SearchScreen(),
+        body: AddPostScreen(),
       ),
     );
   }
