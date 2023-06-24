@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/colors.dart';
 import 'package:instagram/constants/fonts.dart';
+import 'package:instagram/screens/auth_screen.dart';
 
-class WellcomePage extends StatelessWidget {
+class WellcomePage extends StatefulWidget {
   const WellcomePage({super.key});
+
+  @override
+  State<WellcomePage> createState() => _WellcomePageState();
+}
+
+class _WellcomePageState extends State<WellcomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AuthScreen(),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +35,7 @@ class WellcomePage extends StatelessWidget {
         image: DecorationImage(
           repeat: ImageRepeat.repeat,
           image: AssetImage(
-            'assets/images/pattern 1.png',
+            'assets/images/pattern1.png',
           ),
         ),
       ),

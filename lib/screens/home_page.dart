@@ -18,8 +18,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isliked = false;
   bool issaved = false;
+
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: homescreen(context),
+    );
+  }
+
+  Container homescreen(BuildContext context) {
     return Container(
       color: AppColors.black,
       child: SafeArea(

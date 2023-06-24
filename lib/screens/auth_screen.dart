@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/colors.dart';
 import 'package:instagram/constants/fonts.dart';
+import 'package:instagram/screens/login_page.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -25,24 +26,26 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromARGB(255, 78, 21, 184),
-            Colors.purple,
-            Colors.purple,
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 78, 21, 184),
+              Colors.purple,
+              Colors.purple,
+            ],
+          ),
+        ),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            rocket(),
+            textfields(),
           ],
         ),
-      ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          rocket(),
-          textfields(),
-        ],
       ),
     );
   }
@@ -183,7 +186,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t you have an account?',
+                        'Do you have an account already?',
                         style: AppFonts.gb(
                           color: const Color.fromARGB(255, 101, 99, 99),
                           fontsize: 16,
@@ -192,11 +195,21 @@ class _AuthScreenState extends State<AuthScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text(
-                        'sing up',
-                        style: AppFonts.gb(
-                          color: AppColors.grey,
-                          fontsize: 18,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Log in',
+                          style: AppFonts.gb(
+                            color: AppColors.grey,
+                            fontsize: 18,
+                          ),
                         ),
                       ),
                     ],

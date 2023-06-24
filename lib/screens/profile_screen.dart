@@ -18,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(20),
                   child: Container(
@@ -360,46 +361,49 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(180, 45),
-                  backgroundColor: AppColors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(180, 45),
+                    backgroundColor: AppColors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Follow',
+                    style: AppFonts.gb(
+                      fontsize: 20,
+                    ),
                   ),
                 ),
-                onPressed: () {},
-                child: Text(
-                  'Follow',
-                  style: AppFonts.gb(
-                    fontsize: 20,
+                const Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(
+                      width: 3,
+                      color: Colors.white,
+                    ),
+                    minimumSize: const Size(180, 45),
+                    backgroundColor: AppColors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Message',
+                    style: AppFonts.gb(
+                      fontsize: 20,
+                    ),
                   ),
                 ),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  side: const BorderSide(
-                    width: 3,
-                    color: Colors.white,
-                  ),
-                  minimumSize: const Size(180, 45),
-                  backgroundColor: AppColors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Message',
-                  style: AppFonts.gb(
-                    fontsize: 20,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(
             height: 20,
